@@ -1,0 +1,7 @@
+#adminmenu .wp-menu-image img {
+    padding: 0 !important;
+    padding-top: 3px !important;
+}
+.csf-copyright{
+    display: none !important;
+}

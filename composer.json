@@ -1,0 +1,12 @@
+{
+    "name": "msi/alphapico_assistant_core",
+ 
+    "authors": [
+        {
+            "name": "Taha Karami",
+            "email": "tahakarami2088@gamil.com"
+        }
+    ],
+    "autoload": {
+        "classmap" : ["inc/"]
+    }}
