@@ -32,27 +32,27 @@ function aac_user_menu_shortcode()
             </div>
 
             <div class="user-dropdown-body">
-                <a href="https://alphapico.ir/panel/" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/" class="menu-item">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/house-chimney.svg'; ?>" alt=""></span>
                     <span class="menu-text">داشبورد</span>
                     <span class="menu-badge">جدید</span>
                 </a>
-                <a href="https://alphapico.ir/panel/enrolled-courses" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/enrolled-courses" class="menu-item">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/lesson.svg'; ?>" alt=""></span>
                     <span class="menu-text">دوره‌های من</span>
                 </a>
-                <a href="https://alphapico.ir/panel/my-quiz-attempts/" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/my-quiz-attempts/" class="menu-item">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/to-do-alt.svg'; ?>" alt=""></span>
                     <span class="menu-text">آزمون‌ها</span>
                 </a>
             </div>
 
             <div class="user-dropdown-footer">
-                <a href="https://alphapico.ir/panel/settings" class="footer-item">
+                <a href="https://alphapico.ir/dashboard/settings" class="footer-item">
                     <span class="footer-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/user-pen.svg'; ?>" alt=""></span>
                     <span class="footer-text">ویرایش حساب</span>
                 </a>
-                <a href="https://alphapico.ir/panel/logout" class="footer-item logout">
+                <a href="https://alphapico.ir/dashboard/logout" class="footer-item logout">
                     <span class="footer-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/sign-out-alt.svg'; ?>" alt=""></span>
                     <span class="footer-text">خروج </span>
                 </a>
