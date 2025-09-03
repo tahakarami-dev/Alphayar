@@ -31,12 +31,10 @@ class AAC_ASSETS
 
         // css
         wp_enqueue_style('AAC-style-front', AAC_FRONT_ASSETS . 'css/style.css', '', AAC_VER);
-        wp_enqueue_style('AAC-style-support-modules', AAC_INC_PATH . 'modules/support-ticket/assets/css/style.css', '', AAC_VER);
-
-
-
-
-
+        if (is_page('dashboard')) {
+            wp_enqueue_style('AAC-style-support-modules', AAC_INC_PATH . 'modules/support-ticket/assets/css/style.css', '', AAC_VER);
+        }
+       
         // scripts
         wp_enqueue_script('aac-main-scripts', AAC_FRONT_ASSETS . 'js/app.js', ['jquery'], null, true);
         wp_enqueue_script('aac-support-modules', AAC_INC_PATH .  'modules/support-ticket/assets/js/app.js', ['jquery'], null, true);
