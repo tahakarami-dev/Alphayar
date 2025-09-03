@@ -32,16 +32,16 @@ function aac_user_menu_shortcode()
             </div>
 
             <div class="user-dropdown-body">
-                <a href="https://alphapico.ir/dashboard/" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/" class="menu-item-dashboard">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/house-chimney.svg'; ?>" alt=""></span>
                     <span class="menu-text">داشبورد</span>
                     <span class="menu-badge">جدید</span>
                 </a>
-                <a href="https://alphapico.ir/dashboard/enrolled-courses" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/enrolled-courses" class="menu-item-dashboard">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/lesson.svg'; ?>" alt=""></span>
                     <span class="menu-text">دوره‌های من</span>
                 </a>
-                <a href="https://alphapico.ir/dashboard/my-quiz-attempts/" class="menu-item">
+                <a href="https://alphapico.ir/dashboard/my-quiz-attempts/" class="menu-item-dashboard">
                     <span class="menu-icon"><img src="<?php echo AAC_FRONT_ASSETS . '/images/to-do-alt.svg'; ?>" alt=""></span>
                     <span class="menu-text">آزمون‌ها</span>
                 </a>
