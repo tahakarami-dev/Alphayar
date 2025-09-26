@@ -567,3 +567,169 @@
 
  
 }
+
+/* Podcast player  */
+.audio-player {
+  border-radius: 25px;
+  padding: 30px 10px;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.control-btn {
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  position: relative;
+  outline: none;
+}
+
+.control-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn.secondary {
+  width: 85px;
+  height: 85px;
+  background: #FFC02066;
+  color: #ffc020;
+}
+
+.control-btn.secondary:hover {
+  box-shadow: 0 8px 25px rgba(255, 192, 32, 0.4);
+}
+
+.control-btn.primary {
+  background: #ffc020;
+  width: 110px;
+  height: 110px;
+  box-shadow: 0 10px 30px rgba(255, 192, 32, 0.3);
+}
+
+.control-btn.primary:hover {
+  background: #e6ac1c;
+  box-shadow: 0 15px 40px rgba(255, 192, 32, 0.5);
+}
+
+.progress-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #FFC02066;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffc020 0%, #ffb000 100%);
+  border-radius: 5px;
+  width: 0%;
+  transition: width 0.15s ease-out;
+  position: absolute;
+  right: 0;
+  left: auto;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.next-icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .audio-player {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  .controls {
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  .control-btn img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .control-btn.secondary {
+    width: 65px;
+    height: 65px;
+  }
+
+  .control-btn.primary {
+    width: 85px;
+    height: 85px;
+  }
+
+  .time-display {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .progress-bar {
+    height: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .controls {
+    gap: 15px;
+  }
+
+  .control-btn.secondary {
+    width: 55px;
+    height: 55px;
+  }
+
+  .control-btn.primary {
+    width: 75px;
+    height: 75px;
+  }
+
+  .control-btn img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .time-display {
+    font-size: 12px;
+  }
+
+  .progress-bar {
+    height: 6px;
+  }
+}
+/* End Podcast Player  */
