@@ -79,6 +79,8 @@ class Core
         require_once  AAC_INC_PATH . '/admin/content-loader.php';
         require_once  AAC_VIEWS_PATH . 'front/templates/user-drop-down.php';
         require_once  AAC_VIEWS_PATH . 'front/templates/cart-drop-down.php';
+        require_once  AAC_VIEWS_PATH . 'front/templates/podcast-player.php';
+
 
 
 
