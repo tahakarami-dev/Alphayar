@@ -1,11 +1,18 @@
 <?php
 function aac_user_menu_shortcode()
 {
-    if (!is_user_logged_in()) {
-        return '';
-    }
-
     ob_start();
+
+    if (!is_user_logged_in()) {
+        ?>
+        <div class="user-menu-wrapper">
+            <a href="https://alphapico.ir/auth" class="user-avatar-button user-box-icon">
+                <img src="<?php echo AAC_FRONT_ASSETS . '/images/user.svg'; ?>" alt="Login">
+            </a>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
 
     $current_user = wp_get_current_user();
     $user_mobile = get_user_meta($current_user->ID, 'mobile_number', true);
@@ -15,7 +22,7 @@ function aac_user_menu_shortcode()
     if (strpos($avatar_url, 'default') !== false || !$avatar_url) {
         $avatar_url = $default_avatar;
     }
-?>
+    ?>
     <div class="user-menu-wrapper">
         <div class="user-avatar-button user-box-icon">
             <img src="<?php echo AAC_FRONT_ASSETS . '/images/user.svg'; ?>" alt="">
@@ -59,7 +66,7 @@ function aac_user_menu_shortcode()
             </div>
         </div>
     </div>
-<?php
+    <?php
     return ob_get_clean();
 }
 add_shortcode('aac_user_menu', 'aac_user_menu_shortcode');
