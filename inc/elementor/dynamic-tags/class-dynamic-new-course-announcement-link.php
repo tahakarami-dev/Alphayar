@@ -18,11 +18,13 @@ class AAC_New_Course_Announcement_Link_Tag extends \Elementor\Core\DynamicTags\T
     }
 
     public function get_categories() {
-        return [ \Elementor\Modules\DynamicTags\Module::TEXT_CATEGORY ];
+        return [ \Elementor\Modules\DynamicTags\Module::URL_CATEGORY ];
     }
 
     public function render() {
         $announcement = aac_settings('new-course-announcement-link');
-        echo !empty($announcement) ? esc_html($announcement) : '';
+        if (!empty($announcement)) {
+            echo esc_url($announcement);
+        }
     }
 }
