@@ -45,11 +45,6 @@ function aac_cart_menu_shortcode()
                                         ?>
                                     </div>
                                 </div>
-                                <div class="cart-item-remove">
-                                    <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove-item" aria-label="حذف">
-                                        <img src="<?php echo AAC_FRONT_ASSETS . '/images/trash.svg'; ?>" alt="حذف" class="remove-icon">
-                                    </a>
-                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
