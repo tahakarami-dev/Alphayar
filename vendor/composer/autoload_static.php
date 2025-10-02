@@ -63,6 +63,7 @@ class ComposerStaticInit382308e6ec7e1a2af6e37c1014faf8aa
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Elementor\\AAC_Course_Lessons_Count_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-course-lessons-count.php',
         'Elementor\\AAC_Daily_Visits_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-daily-visits.php',
+        'Elementor\\AAC_New_Course_Announcement_Link_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-new-course-announcement-link.php',
         'Elementor\\AAC_New_Course_Announcement_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-new-course-announcement.php',
         'Elementor\\AAC_Published_Courses_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-published-courses.php',
         'Elementor\\AAC_Published_Posts_Tag' => __DIR__ . '/../..' . '/inc/elementor/dynamic-tags/class-dynamic-published-posts.php',

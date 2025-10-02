@@ -35,6 +35,11 @@ CSF::createSection($prefix, array(
             'title' => 'اطلاعیه دوره جدید ',
             'default' => 'دورهٔ مبانی هوش مصنوعی از طاها کرمی منتشر شد!'
         ),
+        array(
+            'id'    => 'new-course-announcement-link',
+            'type'  => 'text',
+            'title' => 'لینک دوره جدید ',
+        ),
 
     )
 ));

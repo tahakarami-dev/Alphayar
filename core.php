@@ -131,6 +131,9 @@ class Core
         
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-new-course-announcement.php';
             $dynamic_tags->register(new \Elementor\AAC_New_Course_Announcement_Tag());
+
+            require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-new-course-announcement-link.php';
+            $dynamic_tags->register(new \Elementor\AAC_New_Course_Announcement_Link_Tag());
             
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-course-lessons-count.php';
             $dynamic_tags->register(new \Elementor\AAC_Course_Lessons_Count_Tag());
