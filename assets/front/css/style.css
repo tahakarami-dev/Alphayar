@@ -19,6 +19,7 @@
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  border-radius: 48px !important;
   cursor: pointer !important;
   transition: var(--transition) !important;
 }
@@ -236,7 +237,7 @@
   width: 55px !important;
   height: 54px !important;
   flex-shrink: 0 !important;
-  border-radius: 14px !important;
+  border-radius: 48px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -244,8 +245,6 @@
   cursor: pointer !important;
   transition: var(--transition) !important;
 }
-
-
 
 .cart-box-icon img {
   width: 27px !important;
