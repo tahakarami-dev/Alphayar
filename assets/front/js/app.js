@@ -130,151 +130,150 @@ jQuery(document).ready(function($) {
 
 // Podcast Player 
 
-  $(document).ready(function() {
-    let isPlaying = false;
-    let isDragging = false;
-    let currentTime = 0;
-    let duration = 0;
+jQuery(document).ready(function($) {
+  let isPlaying = false;
+  let isDragging = false;
+  let currentTime = 0;
+  let duration = 0;
 
-    const $playPauseBtn = $('#playPauseBtn');
-    const $playPauseIcon = $('#playPauseIcon');
-    const $prevBtn = $('#prevBtn');
-    const $nextBtn = $('#nextBtn');
-    const $progressBar = $('#progressBar');
-    const $progressFill = $('#progressFill');
-    const $progressHandle = $('#progressHandle');
-    const $currentTimeDisplay = $('#currentTime');
-    const $totalTimeDisplay = $('#totalTime');
-    const $audioElement = $('#audioElement')[0];
+  const $playPauseBtn = jQuery('#playPauseBtn');
+  const $playPauseIcon = jQuery('#playPauseIcon');
+  const $prevBtn = jQuery('#prevBtn');
+  const $nextBtn = jQuery('#nextBtn');
+  const $progressBar = jQuery('#progressBar');
+  const $progressFill = jQuery('#progressFill');
+  const $progressHandle = jQuery('#progressHandle');
+  const $currentTimeDisplay = jQuery('#currentTime');
+  const $totalTimeDisplay = jQuery('#totalTime');
+  const $audioElement = jQuery('#audioElement')[0];
 
-    function formatTime(seconds) {
-      if (isNaN(seconds) || !isFinite(seconds)) return '۰۰:۰۰';
-      const mins = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      const persianNums = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-      let minStr = mins.toString().split('').map(d => persianNums[parseInt(d)]).join('');
-      let secStr = secs.toString().padStart(2, '0').split('').map(d => persianNums[parseInt(d)]).join('');
-      return minStr + ':' + secStr;
+  function formatTime(seconds) {
+    if (isNaN(seconds) || !isFinite(seconds)) return '۰۰:۰۰';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    const persianNums = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    let minStr = mins.toString().split('').map(d => persianNums[parseInt(d)]).join('');
+    let secStr = secs.toString().padStart(2, '0').split('').map(d => persianNums[parseInt(d)]).join('');
+    return minStr + ':' + secStr;
+  }
+
+  function updatePlayButton() {
+    $playPauseIcon.css('opacity', isPlaying ? '1' : '0.7');
+  }
+
+  function updateProgress() {
+    if (!isDragging && duration > 0) {
+      const progress = (currentTime / duration) * 100;
+      $progressFill.css('width', progress + '%');
+      $progressHandle.css('left', progress + '%');
     }
+    $currentTimeDisplay.text(formatTime(currentTime));
+  }
 
-    function updatePlayButton() {
-      $playPauseIcon.css('opacity', isPlaying ? '1' : '0.7');
-    }
-
-    function updateProgress() {
-      if (!isDragging && duration > 0) {
-        const progress = (currentTime / duration) * 100;
-        $progressFill.css('width', progress + '%');
-        $progressHandle.css('left', progress + '%');
-      }
-      $currentTimeDisplay.text(formatTime(currentTime));
-    }
-
-    $audioElement.addEventListener('loadedmetadata', function() {
-      duration = $audioElement.duration;
-      $totalTimeDisplay.text(formatTime(duration));
-      updateProgress();
-    });
-
-    $audioElement.addEventListener('timeupdate', function() {
-      currentTime = $audioElement.currentTime;
-      updateProgress();
-    });
-
-    $audioElement.addEventListener('ended', function() {
-      isPlaying = false;
-      updatePlayButton();
-      currentTime = 0;
-      updateProgress();
-    });
-
-    $playPauseBtn.click(function() {
-      if (isPlaying) {
-        $audioElement.pause();
-        isPlaying = false;
-      } else {
-        $audioElement.play().then(() => {
-          isPlaying = true;
-        }).catch(error => {
-          console.error('Play error:', error);
-          isPlaying = false;
-        });
-      }
-      updatePlayButton();
-    });
-
-    $prevBtn.click(function() {
-      currentTime = Math.max(0, currentTime - 15);
-      $audioElement.currentTime = currentTime;
-      updateProgress();
-    });
-
-    $nextBtn.click(function() {
-      currentTime = Math.min(duration, currentTime + 30);
-      $audioElement.currentTime = currentTime;
-      updateProgress();
-    });
-
-    $progressBar.click(function(e) {
-      if (!isDragging && duration > 0) {
-        const rect = this.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const progress = clickX / rect.width;
-        currentTime = progress * duration;
-        $audioElement.currentTime = currentTime;
-        updateProgress();
-      }
-    });
-
-    let startDrag = function(e) {
-      isDragging = true;
-      $(document).on('mousemove', handleDrag);
-      $(document).on('mouseup', endDrag);
-      e.preventDefault();
-    };
-
-    let handleDrag = function(e) {
-      if (isDragging && duration > 0) {
-        const rect = $progressBar[0].getBoundingClientRect();
-        const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-        const progress = dragX / rect.width;
-        const newTime = progress * duration;
-        $progressFill.css('width', (progress * 100) + '%');
-        $progressHandle.css('left', (progress * 100) + '%');
-        $currentTimeDisplay.text(formatTime(newTime));
-      }
-    };
-
-    let endDrag = function(e) {
-      if (isDragging && duration > 0) {
-        const rect = $progressBar[0].getBoundingClientRect();
-        const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-        const progress = dragX / rect.width;
-        currentTime = progress * duration;
-        $audioElement.currentTime = currentTime;
-        isDragging = false;
-        $(document).off('mousemove', handleDrag);
-        $(document).off('mouseup', endDrag);
-      }
-    };
-
-    $progressHandle.on('mousedown', startDrag);
-
-    $(document).keydown(function(e) {
-      switch(e.code) {
-        case 'Space':
-          e.preventDefault();
-          $playPauseBtn.click();
-          break;
-        case 'ArrowLeft':
-          $prevBtn.click();
-          break;
-        case 'ArrowRight':
-          $nextBtn.click();
-          break;
-      }
-    });
+  $audioElement.addEventListener('loadedmetadata', function() {
+    duration = $audioElement.duration;
+    $totalTimeDisplay.text(formatTime(duration));
+    updateProgress();
   });
 
+  $audioElement.addEventListener('timeupdate', function() {
+    currentTime = $audioElement.currentTime;
+    updateProgress();
+  });
+
+  $audioElement.addEventListener('ended', function() {
+    isPlaying = false;
+    updatePlayButton();
+    currentTime = 0;
+    updateProgress();
+  });
+
+  $playPauseBtn.on('click', function() {
+    if (isPlaying) {
+      $audioElement.pause();
+      isPlaying = false;
+    } else {
+      $audioElement.play().then(() => {
+        isPlaying = true;
+      }).catch(error => {
+        console.error('Play error:', error);
+        isPlaying = false;
+      });
+    }
+    updatePlayButton();
+  });
+
+  $prevBtn.on('click', function() {
+    currentTime = Math.max(0, currentTime - 15);
+    $audioElement.currentTime = currentTime;
+    updateProgress();
+  });
+
+  $nextBtn.on('click', function() {
+    currentTime = Math.min(duration, currentTime + 30);
+    $audioElement.currentTime = currentTime;
+    updateProgress();
+  });
+
+  $progressBar.on('click', function(e) {
+    if (!isDragging && duration > 0) {
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const progress = clickX / rect.width;
+      currentTime = progress * duration;
+      $audioElement.currentTime = currentTime;
+      updateProgress();
+    }
+  });
+
+  let startDrag = function(e) {
+    isDragging = true;
+    jQuery(document).on('mousemove', handleDrag);
+    jQuery(document).on('mouseup', endDrag);
+    e.preventDefault();
+  };
+
+  let handleDrag = function(e) {
+    if (isDragging && duration > 0) {
+      const rect = $progressBar[0].getBoundingClientRect();
+      const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const progress = dragX / rect.width;
+      const newTime = progress * duration;
+      $progressFill.css('width', (progress * 100) + '%');
+      $progressHandle.css('left', (progress * 100) + '%');
+      $currentTimeDisplay.text(formatTime(newTime));
+    }
+  };
+
+  let endDrag = function(e) {
+    if (isDragging && duration > 0) {
+      const rect = $progressBar[0].getBoundingClientRect();
+      const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const progress = dragX / rect.width;
+      currentTime = progress * duration;
+      $audioElement.currentTime = currentTime;
+      isDragging = false;
+      jQuery(document).off('mousemove', handleDrag);
+      jQuery(document).off('mouseup', endDrag);
+    }
+  };
+
+  $progressHandle.on('mousedown', startDrag);
+
+  jQuery(document).on('keydown', function(e) {
+    switch(e.code) {
+      case 'Space':
+        e.preventDefault();
+        $playPauseBtn.click();
+        break;
+      case 'ArrowLeft':
+        $prevBtn.click();
+        break;
+      case 'ArrowRight':
+        $nextBtn.click();
+        break;
+    }
+  });
+});
 
 // End Podcast Player 
