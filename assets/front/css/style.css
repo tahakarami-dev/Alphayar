@@ -574,6 +574,7 @@
   width: 100%;
   max-width: 520px;
   margin: auto;
+  direction: ltr;
 }
 
 .controls {
@@ -581,6 +582,7 @@
   justify-content: space-around;
   align-items: center;
   margin-bottom: 60px;
+  direction: rtl; 
 }
 
 .control-btn {
@@ -594,6 +596,9 @@
   user-select: none;
   position: relative;
   outline: none;
+}
+.next-btn , .prev-btn{
+  transform: rotate(180deg) !important;
 }
 
 .control-btn img {
@@ -640,7 +645,7 @@
   border-radius: 5px;
   position: relative;
   cursor: pointer;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .progress-fill {
@@ -650,8 +655,27 @@
   width: 0%;
   transition: width 0.15s ease-out;
   position: absolute;
-  right: 0;
-  left: auto;
+  left: 0; 
+  top: 0;
+}
+
+.progress-handle {
+  width: 18px;
+  height: 18px;
+  background: #ffc020;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.progress-handle:hover {
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 .time-display {
@@ -662,6 +686,7 @@
   color: #666;
   font-weight: 500;
   margin-bottom: 25px;
+  direction: rtl; 
 }
 
 .next-icon {
@@ -702,7 +727,13 @@
   .progress-bar {
     height: 8px;
   }
+  
+  .progress-handle {
+    width: 16px;
+    height: 16px;
+  }
 }
+
 @media (max-width: 480px) {
   .controls {
     gap: 15px;
@@ -729,6 +760,11 @@
 
   .progress-bar {
     height: 6px;
+  }
+  
+  .progress-handle {
+    width: 14px;
+    height: 14px;
   }
 }
 /* End Podcast Player  */

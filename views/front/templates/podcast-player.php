@@ -16,17 +16,18 @@ function podcast_audio_player_shortcode($atts) {
     ?>
     <div class="audio-player">
       <div class="controls">
-        <button class="control-btn secondary prev-btn" id="prevBtn" title="15 ثانیه به عقب">
-          <img src="https://alphapico.ir/uploadsfiles/2025/09/rewind.svg" alt="عقب">
+      <button class="control-btn secondary next-btn" id="nextBtn" title="30 ثانیه به جلو">
+          <img class="next-icon" src="https://alphapico.ir/uploadsfiles/2025/09/rewind.svg" alt="جلو">
         </button>
-        
+
         <button class="control-btn primary play-pause-btn" id="playPauseBtn" title="پخش/توقف">
           <img id="playPauseIcon" src="https://alphapico.ir/uploadsfiles/2025/09/play-pause.svg" alt="پخش/توقف">
         </button>
         
-        <button class="control-btn secondary next-btn" id="nextBtn" title="30 ثانیه به جلو">
-          <img class="next-icon" src="https://alphapico.ir/uploadsfiles/2025/09/rewind.svg" alt="جلو">
+        <button class="control-btn secondary prev-btn" id="prevBtn" title="15 ثانیه به عقب">
+          <img src="https://alphapico.ir/uploadsfiles/2025/09/rewind.svg" alt="عقب">
         </button>
+        
       </div>
       <div class="time-display">
         <span id="currentTime">00:00</span>
@@ -36,6 +37,7 @@ function podcast_audio_player_shortcode($atts) {
       <div class="progress-container">
         <div class="progress-bar" id="progressBar">
           <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-handle" id="progressHandle"></div>
         </div>
       </div>
 

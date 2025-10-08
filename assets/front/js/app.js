@@ -219,7 +219,7 @@ jQuery(document).ready(function($) {
     if (!isDragging && duration > 0) {
       const rect = this.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
-      const progress = clickX / rect.width;
+      const progress = (clickX / rect.width);
       currentTime = progress * duration;
       $audioElement.currentTime = currentTime;
       updateProgress();
@@ -230,13 +230,19 @@ jQuery(document).ready(function($) {
     isDragging = true;
     jQuery(document).on('mousemove', handleDrag);
     jQuery(document).on('mouseup', endDrag);
+    jQuery(document).on('touchmove', handleDrag);
+    jQuery(document).on('touchend', endDrag);
     e.preventDefault();
   };
 
   let handleDrag = function(e) {
     if (isDragging && duration > 0) {
       const rect = $progressBar[0].getBoundingClientRect();
-      const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      let clientX = e.clientX;
+      if (e.type === 'touchmove') {
+        clientX = e.touches[0].clientX;
+      }
+      const dragX = Math.max(0, Math.min(rect.width, clientX - rect.left));
       const progress = dragX / rect.width;
       const newTime = progress * duration;
       $progressFill.css('width', (progress * 100) + '%');
@@ -248,17 +254,24 @@ jQuery(document).ready(function($) {
   let endDrag = function(e) {
     if (isDragging && duration > 0) {
       const rect = $progressBar[0].getBoundingClientRect();
-      const dragX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      let clientX = e.clientX;
+      if (e.type === 'touchend') {
+        clientX = e.changedTouches[0].clientX;
+      }
+      const dragX = Math.max(0, Math.min(rect.width, clientX - rect.left));
       const progress = dragX / rect.width;
       currentTime = progress * duration;
       $audioElement.currentTime = currentTime;
       isDragging = false;
       jQuery(document).off('mousemove', handleDrag);
       jQuery(document).off('mouseup', endDrag);
+      jQuery(document).off('touchmove', handleDrag);
+      jQuery(document).off('touchend', endDrag);
     }
   };
 
   $progressHandle.on('mousedown', startDrag);
+  $progressHandle.on('touchstart', startDrag);
 
   jQuery(document).on('keydown', function(e) {
     switch(e.code) {
