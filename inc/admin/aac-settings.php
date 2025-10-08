@@ -48,35 +48,10 @@ CSF::createSection($prefix, array(
     'fields' => array(
 
         array(
-            'id'         => 'number-of-students-manual',
-            'type'       => 'switcher',
-            'title'      => 'تعداد دانشجویان (خودکار)', 
-            'default'    => true
-          ),
-        array(
-            'id'    => 'number-of-students',
-            'type'  => 'number',
-            'title' => 'تعداد دانشجویان ',
-            'dependency' => array( 'number-of-students-manual', '==', 'false' )
-        ),
-        array(
             'id'    => 'satisfaction-percentage',
             'type'  => 'number',
             'title' => 'درصد رضایت پلتفرم',
             'default' => '96'
-        ),
-        array(
-            'id'         => 'number-of-users-manual',
-            'type'       => 'switcher',
-            'title'      => '  تعداد کاربران  (خودکار)', 
-            'default'    => true
-          ),
-        array(
-            'id'    => 'number-of-users',
-            'type'  => 'number',
-            'title' => 'تعداد کاربران ',
-            'dependency' => array( 'number-of-users-manual', '==', 'false' )
-
         ),
         array(
             'id'         => 'daily-visit-manual',

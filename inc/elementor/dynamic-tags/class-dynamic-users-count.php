@@ -22,13 +22,9 @@ class AAC_Users_Count_Tag extends \Elementor\Core\DynamicTags\Tag {
     }
 
     public function render() {
-        $manual_mode = aac_settings('number-of-users-manual');
-        if ($manual_mode === true || $manual_mode === 'true') {
-            $count = count_users();
-            $total = isset($count['total_users']) ? intval($count['total_users']) : 0;
-        } else {
-            $total = intval(aac_settings('number-of-users'));
-        }
+        $count = count_users();
+        $total = isset($count['total_users']) ? intval($count['total_users']) : 0;
         echo number_format($total, 0, '.', '٬');
     }
+    
 }

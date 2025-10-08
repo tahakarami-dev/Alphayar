@@ -6,16 +6,6 @@ function aac_get_published_posts_count()
     return intval($count);
 }
 
-function aac_get_auto_users_count()
-{
-    $user_count = count_users();
-    $total = isset($user_count['total_users']) ? intval($user_count['total_users']) : 0;
-
-
-    return number_format($total, 0, '.', '٬');
-}
-
-
 function aac_get_published_courses_count()
 {
 
@@ -27,26 +17,18 @@ function aac_get_published_courses_count()
 
     return 0;
 }
-
-function aac_get_tutor_enrolled_count()
-{
+function aac_get_tutor_enrolled_count() {
     global $wpdb;
 
-    $manual_mode = aac_settings('number-of-students-manual');
+    $count = $wpdb->get_var("
+        SELECT COUNT(DISTINCT p.post_author)
+        FROM {$wpdb->prefix}posts p
+        WHERE p.post_type = 'tutor_enrolled'
+    ");
 
-    $is_auto = filter_var($manual_mode, FILTER_VALIDATE_BOOLEAN);
-
-    if ($is_auto) {
-        $count = $wpdb->get_var("
-            SELECT COUNT(*) 
-            FROM {$wpdb->prefix}posts 
-            WHERE post_type = 'tutor_enrolled'
-        ");
-        return intval($count);
-    } else {
-        return intval(aac_settings('number-of-students'));
-    }
+    return intval($count);
 }
+
 
 
 function aac_get_daily_visits()
