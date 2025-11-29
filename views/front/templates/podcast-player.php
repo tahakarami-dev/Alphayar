@@ -27,7 +27,6 @@ function podcast_audio_player_shortcode($atts) {
         <button class="control-btn secondary prev-btn" id="prevBtn" title="15 ثانیه به عقب">
           <img src="https://alphapico.ir/uploadsfiles/2025/09/rewind.svg" alt="عقب">
         </button>
-        
       </div>
       <div class="time-display">
         <span id="currentTime">00:00</span>

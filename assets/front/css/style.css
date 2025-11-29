@@ -207,7 +207,7 @@
 }
 
 .user-box-icon {
-  background-color: #FFE5A3 !important;
+  background-color: #ffc020 !important;
   width: 55px !important;
   height: 54px !important;
   flex-shrink: 0 !important;
@@ -225,7 +225,6 @@
   width: 27px !important;
 }
 
-/* استایل‌های اصلی سبد خرید - بدون تغییر */
 .cart-menu-wrapper {
   position: relative !important;
   display: inline-block !important;
