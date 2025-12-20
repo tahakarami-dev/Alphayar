@@ -66,7 +66,7 @@ class AAC_Teaching_Hours_Tag extends \Elementor\Core\DynamicTags\Tag {
 			return;
 		}
 
-		$total_hours = round($total_seconds / 3600, 1);
+		$total_hours = ceil($total_seconds / 3600);
 		echo $total_hours;
 	}
 }
