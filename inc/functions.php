@@ -15,7 +15,8 @@ function aac_settings($key = '')
 }
 
 // Calculating daily site visits
-function aac_get_real_daily_visits() {
+function aac_get_real_daily_visits()
+{
     if (preg_match('/bot|crawl|slurp|spider|facebook|google|yandex/i', $_SERVER['HTTP_USER_AGENT'])) {
         return get_transient('aac_daily_visits_' . date('Y-m-d')) ?: 0;
     }
@@ -52,7 +53,8 @@ function aac_get_real_daily_visits() {
 add_action('wp_ajax_aac_remove_from_cart', 'aac_remove_from_cart');
 add_action('wp_ajax_nopriv_aac_remove_from_cart', 'aac_remove_from_cart');
 
-function aac_remove_from_cart() {
+function aac_remove_from_cart()
+{
     if (!isset($_POST['cart_item_key'])) {
         wp_send_json_error(['message' => 'کلید آیتم موجود نیست']);
     }
@@ -61,10 +63,10 @@ function aac_remove_from_cart() {
 
     if (WC()->cart && $item = WC()->cart->get_cart_item($cart_item_key)) {
         WC()->cart->remove_cart_item($cart_item_key);
-        
-      
+
+
         wp_send_json_success([
-            'redirect' => true 
+            'redirect' => true
         ]);
     }
 
@@ -72,10 +74,11 @@ function aac_remove_from_cart() {
 }
 
 
-function get_total_lessons_for_course($course_id) {
+function get_total_lessons_for_course($course_id)
+{
     global $wpdb;
 
-    
+
     $topic_ids = $wpdb->get_col($wpdb->prepare(
         "SELECT ID FROM {$wpdb->prefix}posts WHERE post_parent = %d AND post_type = 'topics'",
         $course_id
@@ -89,7 +92,7 @@ function get_total_lessons_for_course($course_id) {
         );
     }
 
-  
+
     $direct_lessons = (int) $wpdb->get_var($wpdb->prepare(
         "SELECT COUNT(*) FROM {$wpdb->prefix}posts WHERE post_parent = %d AND post_type = 'lesson'",
         $course_id
@@ -98,4 +101,22 @@ function get_total_lessons_for_course($course_id) {
     return $lessons_under_topics + $direct_lessons;
 }
 
+add_action('init', function () {
+    global $wpdb;
 
+    $orphan_lessons = $wpdb->get_col("
+		SELECT l.ID
+		FROM {$wpdb->prefix}posts l
+		LEFT JOIN {$wpdb->prefix}postmeta cm 
+			ON l.ID = cm.post_id AND cm.meta_key = 'course_id'
+		WHERE l.post_type = 'lesson'
+		  AND l.post_status = 'publish'
+		  AND cm.meta_id IS NULL
+	");
+
+    if (!empty($orphan_lessons)) {
+        foreach ($orphan_lessons as $lesson_id) {
+            wp_delete_post($lesson_id, true);
+        }
+    }
+});

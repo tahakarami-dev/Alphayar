@@ -1,7 +1,7 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class AAC_Teaching_Hours_Tag extends \Elementor\Core\DynamicTags\Tag {
 
@@ -22,46 +22,51 @@ class AAC_Teaching_Hours_Tag extends \Elementor\Core\DynamicTags\Tag {
 	}
 
 	protected function register_controls() {
-		
 	}
 
 	public function render() {
 		global $wpdb;
-	
+
 		$total_seconds = 0;
-	
+
 		$results = $wpdb->get_results("
-			SELECT pm.meta_value
-			FROM {$wpdb->prefix}posts p
-			JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id
-			WHERE p.post_type = 'lesson'
-			  AND p.post_status = 'publish'
-			  AND pm.meta_key = '_video'
+			SELECT vm.meta_value
+			FROM {$wpdb->prefix}posts lesson
+			INNER JOIN {$wpdb->prefix}postmeta vm 
+				ON lesson.ID = vm.post_id AND vm.meta_key = '_video'
+			INNER JOIN {$wpdb->prefix}postmeta cm 
+				ON lesson.ID = cm.post_id AND cm.meta_key = 'course_id'
+			INNER JOIN {$wpdb->prefix}posts course 
+				ON course.ID = cm.meta_value
+			WHERE lesson.post_type = 'lesson'
+			  AND lesson.post_status = 'publish'
+			  AND course.post_status = 'publish'
 		");
-	
-		foreach ( $results as $row ) {
-			$data = @unserialize( $row->meta_value );
-			if ( $data && isset( $data['runtime'] ) ) {
-				$hours   = isset( $data['runtime']['hours'] )   ? intval( $data['runtime']['hours'] )   : 0;
-				$minutes = isset( $data['runtime']['minutes'] ) ? intval( $data['runtime']['minutes'] ) : 0;
-				$seconds = isset( $data['runtime']['seconds'] ) ? intval( $data['runtime']['seconds'] ) : 0;
-	
-				$total_seconds += ($hours * 3600) + ($minutes * 60) + $seconds;
+
+		foreach ($results as $row) {
+			$data = maybe_unserialize($row->meta_value);
+
+			if (!is_array($data) || empty($data['runtime']) || !is_array($data['runtime'])) {
+				continue;
 			}
+
+			$hours   = intval($data['runtime']['hours'] ?? 0);
+			$minutes = intval($data['runtime']['minutes'] ?? 0);
+			$seconds = intval($data['runtime']['seconds'] ?? 0);
+
+			if ($hours === 0 && $minutes === 0 && $seconds === 0) {
+				continue;
+			}
+
+			$total_seconds += ($hours * 3600) + ($minutes * 60) + $seconds;
 		}
-	
-		$total_hours = $total_seconds / 3600;
-	
-	
-		$rounded_hours = ceil($total_hours);
-	
-		
-		echo $rounded_hours;
+
+		if ($total_seconds === 0) {
+			echo 0;
+			return;
+		}
+
+		$total_hours = round($total_seconds / 3600, 1);
+		echo $total_hours;
 	}
-	
-	
 }
-
-
-
-
