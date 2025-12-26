@@ -101,23 +101,4 @@ function get_total_lessons_for_course($course_id)
     return $lessons_under_topics + $direct_lessons;
 }
 
-add_action('init', function () {
-    global $wpdb;
-
-    $orphan_lessons = $wpdb->get_col("
-		SELECT l.ID
-		FROM {$wpdb->prefix}posts l
-		LEFT JOIN {$wpdb->prefix}postmeta cm 
-			ON l.ID = cm.post_id AND cm.meta_key = 'course_id'
-		WHERE l.post_type = 'lesson'
-		  AND l.post_status = 'publish'
-		  AND cm.meta_id IS NULL
-	");
-
-    if (!empty($orphan_lessons)) {
-        foreach ($orphan_lessons as $lesson_id) {
-            wp_delete_post($lesson_id, true);
-        }
-    }
-});
 
