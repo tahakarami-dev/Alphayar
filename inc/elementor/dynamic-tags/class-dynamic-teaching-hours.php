@@ -34,13 +34,8 @@ class AAC_Teaching_Hours_Tag extends \Elementor\Core\DynamicTags\Tag {
 			FROM {$wpdb->prefix}posts lesson
 			INNER JOIN {$wpdb->prefix}postmeta vm 
 				ON lesson.ID = vm.post_id AND vm.meta_key = '_video'
-			INNER JOIN {$wpdb->prefix}postmeta cm 
-				ON lesson.ID = cm.post_id AND cm.meta_key = 'course_id'
-			INNER JOIN {$wpdb->prefix}posts course 
-				ON course.ID = cm.meta_value
 			WHERE lesson.post_type = 'lesson'
 			  AND lesson.post_status = 'publish'
-			  AND course.post_status = 'publish'
 		");
 
 		foreach ($results as $row) {
@@ -66,7 +61,7 @@ class AAC_Teaching_Hours_Tag extends \Elementor\Core\DynamicTags\Tag {
 			return;
 		}
 
-		$total_hours = ceil($total_seconds / 3600);
+		$total_hours = round($total_seconds / 3600, 1);
 		echo $total_hours;
 	}
 }
