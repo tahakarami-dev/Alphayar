@@ -68,18 +68,20 @@ class Core
 
     public function init()
     {
-       
+
         require_once AAC_PATH . 'vendor/autoload.php';
         require_once AAC_INC_PATH . 'admin/codestar/codestar-framework.php';
         require_once AAC_INC_PATH . 'admin/aac-settings.php';
         require_once  AAC_INC_PATH . 'functions.php';
-        if(aac_settings('support-module')){
+        if (aac_settings('support-module')) {
             require_once AAC_INC_PATH . 'modules/support-ticket/functions/helpers.php';
         }
         require_once  AAC_INC_PATH . '/admin/content-loader.php';
         require_once  AAC_VIEWS_PATH . 'front/templates/user-drop-down.php';
         require_once  AAC_VIEWS_PATH . 'front/templates/cart-drop-down.php';
         require_once  AAC_VIEWS_PATH . 'front/templates/podcast-player.php';
+        require_once  AAC_VIEWS_PATH . 'front/templates/tablet-notice.php';
+
 
 
 
@@ -110,35 +112,34 @@ class Core
 
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-published-posts.php';
             $dynamic_tags->register(new \Elementor\AAC_Published_Posts_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-users-count.php';
             $dynamic_tags->register(new \Elementor\AAC_Users_Count_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-published-courses.php';
             $dynamic_tags->register(new \Elementor\AAC_Published_Courses_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-teaching-hours.php';
             $dynamic_tags->register(new \Elementor\AAC_Teaching_Hours_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-satisfaction.php';
             $dynamic_tags->register(new \Elementor\AAC_Satisfaction_Percentage_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-tutor-enrolled.php';
             $dynamic_tags->register(new \Elementor\AAC_Tutor_Enrolled_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-daily-visits.php';
             $dynamic_tags->register(new \Elementor\AAC_Daily_Visits_Tag());
-        
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-new-course-announcement.php';
             $dynamic_tags->register(new \Elementor\AAC_New_Course_Announcement_Tag());
 
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-new-course-announcement-link.php';
             $dynamic_tags->register(new \Elementor\AAC_New_Course_Announcement_Link_Tag());
-            
+
             require_once AAC_INC_PATH . 'elementor/dynamic-tags/class-dynamic-course-lessons-count.php';
             $dynamic_tags->register(new \Elementor\AAC_Course_Lessons_Count_Tag());
         });
-        
     }
 
     public function active()
@@ -158,7 +159,7 @@ class Core
         require_once AAC_VIEWS_PATH . 'front/templates/user-drop-down.php';
         require_once AAC_VIEWS_PATH . 'front/templates/cart-drop-down.php';
         require_once AAC_VIEWS_PATH . 'front/templates/podcast-player.php';
-
+        require_once AAC_VIEWS_PATH . 'front/templates/tablet-notice.php';
     }
 
 
